@@ -37,11 +37,12 @@ module.exports = function (config, env) {
     const sassRule = cloneDeep(cssRule)
     const cssModulesRule = cloneDeep(cssRule)
 
-    cssRule.exclude = /\.module\.css$/
-
-    const cssModulesRuleCssLoader = findRule(cssModulesRule, cssLoaderMatcher)
-    cssModulesRuleCssLoader.options = Object.assign({modules: true, localIdentName: '[name]__[local]___[hash:base64:5]'}, cssModulesRuleCssLoader.options)
-    addBeforeRule(config.module.rules, fileLoaderMatcher, cssModulesRule)
+    // cssRule.exclude = /\.module\.css$/
+    cssRule.options = Object.assign({modules: true, localIdentName: '[name]__[local]___[hash:base64:5]'}, cssRule.options);
+    
+    // const cssModulesRuleCssLoader = findRule(cssModulesRule, cssLoaderMatcher)
+    // cssModulesRuleCssLoader.options = Object.assign({modules: true, localIdentName: '[name]__[local]___[hash:base64:5]'}, cssModulesRuleCssLoader.options)
+    // addBeforeRule(config.module.rules, fileLoaderMatcher, cssModulesRule)
 
     // sassRule.test = /\.s[ac]ss$/
     // sassRule.exclude = /\.module\.s[ac]ss$/
