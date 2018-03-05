@@ -1,5 +1,6 @@
 const path = require('path')
 const cloneDeep = require('lodash.clonedeep')
+const cssNext = require('postcss-cssnext')
 
 const ruleChildren = (loader) => loader.use || loader.oneOf || Array.isArray(loader.loader) && loader.loader || []
 
@@ -41,7 +42,7 @@ module.exports = function (config, env) {
 
 
     const plugins = postcssRule.options.plugins() // func
-    plugins.unshift("require('postcss-cssnext')");
+    plugins.unshift(cssNext);
     postcssRule.options.plugins = () => plugins;
 
     // const cssModulesRuleCssLoader = findRule(cssRule, cssLoaderMatcher)
