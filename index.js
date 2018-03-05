@@ -39,7 +39,7 @@ module.exports = function (config, env, customProperties) {
     const postcssRule = findRule(config.module.rules, postcssLoaderMatcher)
 
     const cssModulesRuleCssLoader = findRule(cssRule, cssLoaderMatcher)
-    cssModulesRuleCssLoader.options = Object.assign({modules: true, localIdentName: '[path][name]__[local]___[hash:base64:5]'}, cssModulesRuleCssLoader.options);
+    cssModulesRuleCssLoader.options = Object.assign({modules: true, localIdentName: '[local]___[hash:base64:5]'}, cssModulesRuleCssLoader.options);
 
 
     const plugins = postcssRule.options.plugins() // func
