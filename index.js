@@ -34,7 +34,7 @@ const addBeforeRule = (rulesSource, ruleMatcher, value) => {
 }
 
 module.exports = function (config, env, customProperties) {
-    let customProperties = customProperties || {};
+    customProperties = customProperties || {};
     const cssRule = findRule(config.module.rules, cssRuleMatcher)
     const postcssRule = findRule(config.module.rules, postcssLoaderMatcher)
 
