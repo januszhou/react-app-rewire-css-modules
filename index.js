@@ -33,7 +33,8 @@ const addBeforeRule = (rulesSource, ruleMatcher, value) => {
     rules.splice(index, 0, value)
 }
 
-module.exports = function (config, env) {
+module.exports = function (config, env, customProperties) {
+    let customProperties = customProperties || {};
     const cssRule = findRule(config.module.rules, cssRuleMatcher)
     const postcssRule = findRule(config.module.rules, postcssLoaderMatcher)
 
@@ -42,7 +43,13 @@ module.exports = function (config, env) {
 
 
     const plugins = postcssRule.options.plugins() // func
-    plugins.unshift(cssNext);
+    plugins.unshift(cssNext({
+        features: {
+          customProperties: {
+            variables: customProperties,
+          },
+        },
+    }));
     postcssRule.options.plugins = () => plugins;
 
     // const cssModulesRuleCssLoader = findRule(cssRule, cssLoaderMatcher)
