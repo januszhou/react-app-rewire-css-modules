@@ -37,7 +37,7 @@ module.exports = function (config, env) {
     const sassRule = cloneDeep(cssRule)
     const cssModulesRule = cloneDeep(cssRule)
 
-    cssRule.exclude = /\.module\.css$/
+    // cssRule.exclude = /\.css$/
 
     const cssModulesRuleCssLoader = findRule(cssModulesRule, cssLoaderMatcher)
     cssModulesRuleCssLoader.options = Object.assign({modules: true, localIdentName: '[name]__[local]___[hash:base64:5]'}, cssModulesRuleCssLoader.options)
