@@ -34,14 +34,17 @@ const addBeforeRule = (rulesSource, ruleMatcher, value) => {
 
 module.exports = function (config, env) {
     const cssRule = findRule(config.module.rules, cssRuleMatcher)
-    const sassRule = cloneDeep(cssRule)
-    const cssModulesRule = cloneDeep(cssRule)
-
-    // const cssLoader = findRule(cssModulesRule, cssLoaderMatcher);
-    // cssRule.exclude = /\.module\.css$/
+    const postcssRule = findRule(config.module.rules, postcssLoaderMatcher)
 
     const cssModulesRuleCssLoader = findRule(cssRule, cssLoaderMatcher)
     cssModulesRuleCssLoader.options = Object.assign({modules: true, localIdentName: '[name]__[local]___[hash:base64:5]'}, cssModulesRuleCssLoader.options);
+
+
+    const plugins = postcssRule.options.plugins() // func
+    plugins.unshift("require('postcss-cssnext')");
+    postcssRule.options.plugins = () => plugins;
+
+    // const cssModulesRuleCssLoader = findRule(cssRule, cssLoaderMatcher)
     // cssModulesRuleCssLoader.options = Object.assign({modules: true, localIdentName: '[name]__[local]___[hash:base64:5]'}, cssModulesRuleCssLoader.options)
     // addBeforeRule(config.module.rules, fileLoaderMatcher, cssModulesRule)
 
